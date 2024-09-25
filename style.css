@@ -1,0 +1,230 @@
+/*general*/
+*{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin: 0;
+  position: relative;
+  width: auto;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+li{
+  list-style: none;
+}
+
+
+/*head*/
+
+.header{
+  height: 10%;
+  background: rgba(82,140,255,1);
+}
+
+#giorno{
+  display: block;
+  font-size: 5vh;
+  text-align: right;
+  padding-top: 2%;
+  padding-right: 5%;
+  padding-bottom: 2%;
+}
+
+
+/*content*/
+
+.content{
+  height: 60%;
+  background: rgb(0,224,255);
+  background: linear-gradient(180deg, rgba(82,140,255,1) 0%, rgba(50,126,223,1) 100%);
+}
+
+.flowers {
+  background-position: 0 0;
+}
+  #seed {
+    position: absolute;
+    background-repeat: no-repeat;
+    background-image: url('seme.png');
+    background-size: cover;
+    width: 40px;
+    height: 63px;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+    animation: morningAnimation 30s linear, muovi 60s infinite, blocca 20s;
+    animation-fill-mode: forwards;
+  }
+  #flower {
+    position: absolute;
+    background-repeat: no-repeat;
+    background-image: url('foglia1.png');
+    background-size: cover;
+    transform: translateX(-50%) rotate(90deg);
+    width: 15vh;
+    height: 15vh;
+    left: 43vw;
+    bottom: -4.8vh;
+    animation: nasce 120s ease-in-out, blocca 30s ease-out;
+    animation-fill-mode: forwards;
+    z-index: 1;
+  }
+  #gambo {
+    position: absolute;
+    bottom: -60vh;
+    left: 50.5vw;
+    background: linear-gradient(to bottom, green, green);
+    width: 2vh;
+    height: 60vh;
+    animation: nasceG 120s ease-in-out, blocca 30s ease-out;
+    animation-fill-mode: forwards;
+    z-index: 0;
+  }
+
+
+@keyframes nasce {
+  0% {
+    transform: translateY(calc(100vh - 16vh)) rotate(0deg);
+  }
+  100% {
+    transform: translateY(20vh) rotate(90deg);
+  }
+}
+
+@keyframes nasceG {
+  0% {
+    transform: translateY(calc(100vh - 16vh));
+  }
+  100% {
+    transform: translateY(23vh);
+  }
+}
+
+@keyframes morningAnimation {
+  0% {
+    top: 5vh;
+  }
+  100% {
+    top: 100vh;
+    display: none;
+  }
+}
+
+@keyframes muovi {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(2160deg);
+  }
+}
+
+@keyframes blocca {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+}
+
+/*footer*/
+
+.footer{
+  height: 30%;
+  background: rgb(4,42,11);
+  background: linear-gradient(0deg, rgba(4,42,11,1) 0%, rgba(19,115,30,1) 100%);
+  z-index: 2;
+}
+
+#tempo{
+  font-size: 12vh;
+  text-align: center;
+  color: white;
+  -webkit-text-stroke-width: 0.5vh;
+  -webkit-text-stroke-color: rgb(0, 0, 0) ;
+}
+
+/* Media Queries */
+
+/* TV (fino a 1920px) */
+@media (min-width: 1280px) and (max-width: 1920px) {
+  #giorno {
+    font-size: 6vh; /* Aumenta la dimensione del font */
+  }
+  
+  #seed {
+    width: 50px;
+    height: 80px; /* Aumenta le dimensioni dell'immagine */
+  }
+
+  #flower {
+    width: 20vh;
+    height: 20vh;
+    left: 46vw;
+    bottom: -6vh;
+  }
+
+  #gambo {
+    width: 3vh; /* Aumenta lo spessore */
+  }
+
+  #tempo {
+    font-size: 15vh; /* Aumenta la dimensione del tempo */
+  }
+}
+
+/* Tablet (fino a 768px) */
+@media (max-width: 768px) {
+  #giorno {
+    font-size: 4vh; /* Riduci la dimensione del font */
+  }
+  
+  #seed {
+    width: 30px;
+    height: 50px; /* Riduci le dimensioni dell'immagine */
+  }
+
+  #flower {
+    width: 12vh;
+    height: 12vh;
+    left: 40vw; /* Centra un po' di più */
+  }
+
+  #gambo {
+    width: 1.5vh; /* Riduci lo spessore */
+  }
+
+  #tempo {
+    font-size: 10vh; /* Riduci la dimensione del tempo */
+  }
+}
+
+/* Smartphone (fino a 480px) */
+@media (max-width: 480px) {
+  #giorno {
+    font-size: 3vh; /* Ulteriore riduzione */
+  }
+  
+  #seed {
+    width: 25px;
+    height: 40px;
+  }
+
+  #flower {
+    width: 10vh;
+    height: 10vh;
+    left: 38vw;
+  }
+
+  #gambo {
+    width: 1vh; /* Ulteriore riduzione */
+  }
+
+  #tempo {
+    font-size: 8vh; /* Ulteriore riduzione */
+  }
+}

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prototype</title>
+
+    <link href="style.css" type="text/css" rel="stylesheet">
+
+</head>
+<body onLoad="pagCaricata()">
+
+
+    <div class="header">
+        <h1 id="giorno"></h1>
+    </div>
+
+    <div class="content">
+        <div class="flowers">
+            <ul>
+                <li id="seedOld"></li>
+                <li id="flowerOld"></li>
+                <li id="leaf"></li>
+                <li id="gamboOld"></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <h1 id="tempo"></h1>
+    </div>
+    
+    <!-- code javascript -->
+    <script>
+
+        /*
+        
+        Remember
+        
+        Odiare con tutto il tuo cuore il CSS
+        Non affidarsi all'AI perché genera un codice sbagliato
+        Tempo di lavoro: 112 ore
+        */
+
+        // Miglior lettura
+        function fase1() {
+            let elemento1 = document.getElementById('seedOld');                    
+            elemento1.id = 'seed';
+        }
+        function fase2() {
+            let elemento2 = document.getElementById('flowerOld');
+            let elemento3 = document.getElementById('gamboOld');
+            elemento2.id = 'flower';
+            elemento3.id = 'gambo';
+        }
+        function fase3() {
+            replaceFlower('flower', 'girasole.png');
+        }
+        function fase4() {
+            nascondere();
+            history.go(0);
+        }
+        let eventsExecuted = {
+            fase1: false,
+            fase2: false,
+            fase3: false,
+            fase4: false
+        }
+
+        function ricaricaPag() {
+            const oraAttuale = new Date();
+            const ultimoAggiornamento = localStorage.getItem('ultimoAggiornamento');
+
+            // Controlla se l'aggiornamento è già stato fatto oggi
+            if (!ultimoAggiornamento || new Date(ultimoAggiornamento).toDateString() !== oraAttuale.toDateString()) {
+                // Aggiorna la pagina
+                //history.go(0);
+                location.reload(true);
+                
+                // Memorizza l'orario dell'aggiornamento
+                localStorage.setItem('ultimoAggiornamento', oraAttuale);
+            }
+        }
+
+        // è una Schedulazione
+        function executeScheduledEvents(hours, minutes, seconds) {
+            switch (`${hours}:${minutes}:${seconds}`) {
+                case '08:00:00':
+                    if (!eventsExecuted.fase1) {
+                        fase1();
+                        eventsExecuted.fase1 = true;
+                    }
+                    break;
+    
+                case '10:00:00':
+                    if (!eventsExecuted.fase2) {
+                        fase2();
+                        eventsExecuted.fase2 = true;
+                    }
+                    break;
+    
+                case '16:00:00':
+                    if (!eventsExecuted.fase3) {
+                        fase3();
+                        eventsExecuted.fase3 = true; // Marca come eseguita
+                    }
+                    break;
+    
+                case '18:00:00':
+                    if (!eventsExecuted.fase4) {
+                        fase4();
+                        eventsExecuted.fase4 = true;
+                        ricaricaPag();
+                    }
+                    break;
+    
+                default:
+                    break;
+            }
+        }
+
+        // Controllo di fallimento della Schedulazione
+        function pagCaricata() {
+            let now = new Date();
+            let hours = formatoOrario(now.getHours());
+            let minutes = formatoOrario(now.getMinutes());
+            let seconds = formatoOrario(now.getSeconds());
+            let orario = `${hours}.${minutes}.${seconds}`;
+
+            // Controlla e attiva fase 1 solo se è dopo le 8:00
+            if (hours >= 8 && !eventsExecuted.fase1) {
+                fase1();
+                eventsExecuted.fase1 = true;
+            }
+
+            // Controlla e attiva fase 2 solo se è dopo le 10:00
+            if (hours >= 10 && !eventsExecuted.fase2) {
+                fase2();
+                eventsExecuted.fase2 = true;
+            }
+
+            // Controlla e attiva fase 3 solo se è dopo le 16:00
+            if (hours >= 16 && !eventsExecuted.fase3) {
+                fase3();
+                eventsExecuted.fase3 = true;
+            }
+
+            // Controlla e attiva fase 4 solo se è dopo le 18:00
+            if (hours >= 18 && !eventsExecuted.fase4) {
+                fase4();
+                eventsExecuted.fase4 = true;
+
+                ricaricaPag();
+                // alert("Per favore, aggiorna la pagina 🥺");
+            }
+
+            // Aggiorna l'orario e la data
+            ora();
+            data();
+        }
+
+        // Serve solo per migliorare il codice
+        function formatoOrario(value) {
+                return value.toString().padStart(2, '0');
+            }
+        
+        // è una funzione che stampa la data
+        function data() {
+            let currentDate = new Date();
+            
+            let day = formatoOrario(currentDate.getDate());
+            let month = formatoOrario(currentDate.getMonth() + 1);
+            let year = currentDate.getFullYear();
+            
+            document.getElementById("giorno").innerHTML = `${day}/${month}/${year}`;
+        }
+        
+        // è una funzione che stampa l'ora
+        function ora() {
+            let now = new Date();
+
+            let hours = formatoOrario(now.getHours());
+            let minutes = formatoOrario(now.getMinutes());
+            let seconds = formatoOrario(now.getSeconds());
+
+            document.getElementById("tempo").innerHTML = `${hours}.${minutes}.${seconds}`;
+        }
+
+
+        function generateRandomLeafR() {
+            // Controlla se #gambo esiste
+            // Serve per evitare di generare errori sulla console finchè gambo non esiste
+            let gamboElement = document.querySelector('#gambo');
+            if (!gamboElement) return; // Esci se non esiste
+
+            // Controlla se il numero massimo di foglie è stato raggiunto
+            if (currentLeaves >= maxLeaves) return;
+
+            // dichiarazioni
+            let leafElement = document.createElement('img');
+            leafElement.src = 'foglia.png';
+            leafElement.idName = 'leaf'; //è una proprietà personalizzata
+            leafElement.style.width = '5vh'; // Imposta la larghezza desiderata
+            leafElement.style.height = '5vh'; // Imposta l'altezza desiderata
+            leafElement.style.position = 'absolute'; // Assicurati che sia posizionato correttamente
+
+            
+            // posizione random in altezza
+            let randomTop = Math.random() * 6000;
+            leafElement.style.top = `${randomTop}px`;
+            
+            leafElement.style.transform = `rotate(${180}deg)`; //destra
+            leafElement.style.left = '1.8vh';
+            
+            document.querySelector('#gambo').appendChild(leafElement);
+            currentLeaves++; // Incrementa il conteggio delle foglie
+        }
+
+
+        //generatore le foglie
+        let maxLeaves = 100; // Numero massimo di foglie che puoi generare
+        let currentLeaves = 0; // Conteggio attuale delle foglie generate
+
+        function generateRandomLeafS() {
+            // Controlla se #gambo esiste
+            // Serve per evitare di generare errori sulla console finchè gambo non esiste
+            let gamboElement = document.querySelector('#gambo');
+            if (!gamboElement) return; // Esci se non esiste
+
+            // Controlla se il numero massimo di foglie è stato raggiunto
+            if (currentLeaves >= maxLeaves) return;
+
+            // dichiarazioni
+            let leafElement = document.createElement('img');
+            leafElement.src = 'foglia.png';
+            leafElement.idName = 'leaf'; //è una proprietà personalizzata
+            leafElement.style.width = '5vh'; // Imposta la larghezza desiderata
+            leafElement.style.height = '5vh'; // Imposta l'altezza desiderata
+            leafElement.style.position = 'absolute'; // Assicurati che sia posizionato correttamente
+
+  
+            // posizione random in altezza
+            let randomTop = Math.random() * 6000;
+            leafElement.style.top = `${randomTop}px`;
+  
+            leafElement.style.left = '-5vh'; //sinistra
+  
+            document.querySelector('#gambo').appendChild(leafElement);
+            currentLeaves++; // Incrementa il conteggio delle foglie
+        }
+
+
+        // è una funzione per sostituire il fiore iniziale
+        function replaceFlower(imageId, newImageUrl) {
+            // Prende il primo StyleSheet, il primo file CSS
+            let stylesheet = document.styleSheets[0];
+
+            // è un loop che cerca nel CSS l'id esatto per poterlo modificare
+            for (let rule of stylesheet.cssRules) {
+                if (rule.selectorText === `#${imageId}`) {
+                    rule.style.backgroundImage = `url("${newImageUrl}")`;
+                    return;
+                }
+            }
+
+            // se non viene trovato il suo background image, viene creato uno nuovo
+            let newStylesheet = document.createElement('style');
+            document.head.appendChild(newStylesheet);
+            newStylesheet.sheet.insertRule(`#${imageId} { background-image: url("${newImageUrl}"); }`);
+        }
+
+
+        // Azione contraria delle prime 3 fasi
+        // Serve per far scomparire la pianta
+        function nascondere() {
+            let elemento1 = document.getElementById('seed');
+            let elemento2 = document.getElementById('flower');
+            let elemento3 = document.getElementById('gambo');
+
+            elemento1.id = 'seedOld';
+            elemento2.id = 'flowerOld';
+            elemento3.id = 'gamboOld';
+        }
+
+
+        // Funzione per aggiornare l'orario, la data e gli eventi programmati
+        function aggiorna() {
+            let now = new Date();
+            let hours = formatoOrario(now.getHours());
+            let minutes = formatoOrario(now.getMinutes());
+            let seconds = formatoOrario(now.getSeconds());
+
+            ora();
+            data();
+            executeScheduledEvents(hours, minutes, seconds);
+            generateRandomLeafS();
+            generateRandomLeafR();
+        }
+
+        // Aggiorna tutto ogni secondo
+        setInterval(aggiorna, 1000);
+
+        // Chiamata alla funzione pagCaricata per gestire eventi programmati
+        setInterval(pagCaricata, 1000);
+
+        console.log(innerWidth + "x" + innerHeight);	// 1280x386
+    </script>
+
+</body>
+</html>
