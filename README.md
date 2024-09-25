@@ -6,7 +6,7 @@ using only CSS and JavaScript. The site has some aesthetic issues and bugs, whic
 Although it doesn't have a real everyday use and technically doesn't even deserve to exist, 
 I consider this project a personal achievement after struggling with CSS and JavaScript. The site is no longer supported,
 but it is distributed under an open-source license, so if you want to give it a try, you are welcome. 
-Here is the link to view the site: http://flower.free.nf
+Here is the link to view the site: https://coderartist06.github.io/flower/
 
 
 ## Descrizione IT
@@ -15,7 +15,8 @@ utilizzando solo CSS e JavaScript. Il sito presenta alcuni problemi estetici e b
 Anche se non ha un vero e proprio utilizzo quotidiano e tecnicamente non meriterebbe neanche di esistere, 
 considero questo progetto una soddisfazione personale raggiunta dopo aver lottato con CSS e JavaScript. Il sito non è più supportato,
 ma è distribuito con una licenza open source, quindi se volete cimentarvi anche voi, siete i benvenuti. 
-Ecco il link per visualizzare il sito: http://flower.free.nf
+Ecco il link per visualizzare il sito: https://coderartist06.github.io/flower/
 
 #### Date
-22/09/2024
+Start day 03/09/2024
+Day ended 25/09/2024

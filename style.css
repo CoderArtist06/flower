@@ -217,7 +217,8 @@ li{
   #flower {
     width: 10vh;
     height: 10vh;
-    left: 38vw;
+    left: 19vh;
+    transform: translateX(-50%);
   }
 
   #gambo {
@@ -226,5 +227,6 @@ li{
 
   #tempo {
     font-size: 8vh; /* Ulteriore riduzione */
+    -webkit-text-stroke-width: 0.3vh;
   }
 }
