@@ -8,6 +8,8 @@ I consider this project a personal achievement after struggling with CSS and Jav
 but it is distributed under an open-source license, so if you want to give it a try, you are welcome. 
 Here is the link to view the site: https://coderartist06.github.io/flower/
 
+<br>
+<br>
 
 ## Descrizione IT
 Il sito è nato come una sfida tra i miei capi e me: dovevo creare un sito web che facesse nascere un fiore a determinate fasce orarie
